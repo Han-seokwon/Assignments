@@ -24,13 +24,23 @@ def useStack():
 
 def useStackApp():
     sa = StackApp()
-    sa.converBase(26)
-    expr = "sadad(as{f[]sa}f)asf{asf}asfa[aw]"
-    print("Are brakets balanced? ", sa.checkBrakets(expr))
+    # converBase()
+    # sa.converBase(26)
+
+    # checkBrakets()
+    # expr = "sadad(as{f[]sa}f)asf{asf}asfa[aw]"
+    # print("Are brakets balanced? ", sa.checkBrakets(expr))
+
+    expr =  "2+(4+3*2+1)/3" #  -> 2432+*1+3/+
+    print("Postfix Expression = ", sa.infix2Postfix(expr))
+
+    expr = "2432*+1+3/+"
+    print("Postfix Evaluation = ",sa.evalPostfix(expr))
+
 
 def main():
-    useStack()
-    # useStackApp()
+    # useStack()
+    useStackApp()
 
 if __name__ == "__main__":
     main()

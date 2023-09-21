@@ -22,6 +22,61 @@ class StackApp:
                     if(ch == ")" and ob != "(") or (ch == "}" and ob != "{") or (ch == "]" and ob != "["):
                         return False
         return s.isEmpty()
+    def infix2Postfix(self, expr):
+        s = Stack()
+        output =[]
+
+        for term in expr:
+            if term == '(':
+                s.push(term)
+            elif term == ')':
+                while not s.isEmpty():
+                    op = s.pop()
+                    if(op == '('):
+                        break
+                    output.append(op)
+            elif term in "+-*/":
+                while not s.isEmpty():
+                    op = s.peek()
+                    if (self.precedence(term) <= self.precedence(op)):
+                        output.append(s.pop())
+                    else:
+                        break
+                s.push(term)
+            else:
+                output.append(term)
+
+        while not s.isEmpty():
+            output.append(s.pop())
+
+        return output
+    def precedence(self, op):
+        if op == '(' or op == ')':
+            return 0
+        elif op == '+' or op == '-':
+            return 1
+        elif op == '*' or op == '/':
+            return 2
+        else:
+            return -1
+
+    def evalPostfix(self, expr):
+        s = Stack()
+        for term in expr:
+            if term in "+-*/":
+                value1 = s.pop()
+                value2 = s.pop()
+                if term == '+':
+                    s.push(value2 + value1)
+                elif term == '-':
+                    s.push(value2 - value1)
+                elif term == '*':
+                    s.push(value2 * value1)
+                elif term == '/':
+                    s.push(value2 / value1)
+            else:
+                s.push(float(term))
+        return s.pop()
 
 class Stack:
     def __init__(self):
