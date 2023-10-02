@@ -3,6 +3,7 @@ from TCS import *
 from Maze import *
 
 def useCircularQueue():
+    print("\n<< Test CircularQueue >>")
     que = CircularQueue()
     for i in range(9):
         que.enqueue(i)
@@ -20,6 +21,7 @@ def useCircularQueue():
     print("que.clear() ->  ", que)
 
 def useCircularDequeue():
+    print("\n<< Test CircularDequeue >>")
     deque = CircularDequeue()
     for i in range(9):
         deque.addRear(i)
@@ -45,7 +47,14 @@ def useCircularDequeue():
 
 
 def runSimulation():
-    simul = TicketCounterSimulation( 3, 20, 1, 3)
+    print("<< Test TicketCounterSimulation >>")
+    numAgents = 3
+    numMinutes = 10
+    betweenTime = 1
+    serviceTime = 3
+    print("numAgents : {}, numMinutes: {}, betweenTime : {}, serviceTime : {} ".format(
+        numAgents, numMinutes, betweenTime, serviceTime))
+    simul = TicketCounterSimulation( numAgents, numMinutes, betweenTime, serviceTime)
     simul.run()
 def useMaze():
     maze = Maze()
@@ -59,8 +68,8 @@ def useMaze():
 
 def main():
     # useCircularQueue()
-    # runSimulation()
     # useCircularDequeue()
+    # runSimulation()
     useMaze()
 
 if __name__ == "__main__":

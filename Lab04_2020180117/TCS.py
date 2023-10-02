@@ -1,6 +1,7 @@
 from QueueADT import *
 from random import randint
 
+
 class Passenger:
     def __init__(self, pID, ArrivalTime):
         self._pID = pID
