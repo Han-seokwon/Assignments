@@ -1,8 +1,4 @@
-"""
-Name : Han Seokwon
-Student ID : 2020180117
-Description :  This module test the ABT/ Types(Data structure) defined in Lab01 Module
-"""
+
 
 from Lab01 import Functions , Complex, Point3D
 

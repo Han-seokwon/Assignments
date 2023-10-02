@@ -1,8 +1,3 @@
-"""
-Name : Han Seokwon
-Student ID : 2020180117
-Description :  This moudle contains the ADT for Lab01
-"""
 
 from math import sqrt
 

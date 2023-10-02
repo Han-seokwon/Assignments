@@ -1,5 +1,9 @@
 from Lab03 import Stack, StackApp
-
+"""
+Name : Han Seokwon
+Student ID : 2020180117
+Description :  This module test the Classes defined in Lab03 Module
+"""
 def useStack():
     odd = Stack()
     even = Stack()
@@ -10,32 +14,36 @@ def useStack():
             odd.push(i)
     print("Even Stack : " , even)
     print("Odd Stack : " ,odd)
-    print(even.peek())
-    print(even.pop())
-    print(odd.peek())
-    print(odd.pop())
-    print("Even Stack : " , even)
-    print("Odd Stack : " ,odd)
-    print(odd.size())
-    print(len(odd))
+    print("Even Stack peek() : ", even.peek())
+    print("Even Stack pop() : ", even.pop())
+    print("Even Stack len() : ", len(odd))
 
-    for i in odd:
-        print(i)
+    print("Odd Stack peek() : ", odd.peek())
+    print("Odd Stack pop() : ", odd.pop())
+    print("Odd Stack size() : ", odd.size())
+    print("Odd Stack iter() Test: ", end="")
+    for i in odd: # __iter__ test
+        print(i, end=", ")
 
 def useStackApp():
     sa = StackApp()
-    # converBase()
-    # sa.converBase(26)
 
-    # checkBrakets()
-    # expr = "sadad(as{f[]sa}f)asf{asf}asfa[aw]"
-    # print("Are brakets balanced? ", sa.checkBrakets(expr))
+    # convertBase() test
+    sa.convertBase(26)
 
-    expr =  "2+(4+3*2+1)/3" #  -> 2432+*1+3/+
+
+    # checkBrakets() test
+    expr = "sadad(as{f[]sa}f)asf{asf}asfa[aw]"
+    print(expr)
+    print("Are brakets balanced? ", sa.checkBrakets(expr))
+
+    # infix2Postfix() test
+    expr =  "2+(4+3*2+1)/3" # =  2432+*1+3/+
     print("Postfix Expression = ", sa.infix2Postfix(expr))
 
+    # evalPostfix() test
     expr = "2432*+1+3/+"
-    print("Postfix Evaluation = ",sa.evalPostfix(expr))
+    print("Postfix Evaluation = {:.2f}".format(sa.evalPostfix(expr)))
 
 
 def main():

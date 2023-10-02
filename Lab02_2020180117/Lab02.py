@@ -76,11 +76,11 @@ class EightQueen:
                 return False
 
     def col_clashes(self, col): # k is queen's col position
-        for i in range(col):
-            if(self.diagonal_clashes(i, self.bd[i], k, self.bd[k])):
-                return True
-            else:
-                return False
+        # for i in range(col):
+        #     if(self.diagonal_clashes(i, self.bd[i], k, self.bd[k])):
+        #         return True
+        #     else:
+        #         return False
 
     def diagonal_clashes(self, x0, y0, x1, y1):
         d1 = abs(x0 - y0)
