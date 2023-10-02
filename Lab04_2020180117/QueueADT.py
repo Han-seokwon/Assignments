@@ -8,11 +8,13 @@ class CircularQueue:
 
     def __str__(self):
         out = []
-        if self.front < self.rear:
-            out = self.items[self.front + 1 : self.rear + 1]
-        elif self.front > self.rear:
-            out = self.items[(self.front + 1) % MAX_SIZE : MAX_SIZE] + self.items[0:self.rear + 1]
-        return str(out)
+        front = (self.front + 1) % MAX_SIZE
+        rear =  (self.rear + 1) % MAX_SIZE
+        if front < rear:
+            out = self.items[front : rear]
+        elif front > rear:
+            out = self.items[front : MAX_SIZE] + self.items[0:rear]
+        return "[f={}, r={}] --> ".format(self.front, self.rear) + str(out)
 
     def __len__(self):
         return (self.rear - self.front + MAX_SIZE) % MAX_SIZE
@@ -27,7 +29,7 @@ class CircularQueue:
         self.rear = self.front
 
     def print(self):
-        print("[f={}, r={}] --> ".format(self.front, self.rear), self)
+        print(self)
 
     def peek(self):
         return self.items[(self.front + 1) % MAX_SIZE]
@@ -47,6 +49,27 @@ class CircularDequeue(CircularQueue):
     def __init__(self):
         super().__init__()
 
+    def addFront(self, item):
+        if not self.isFull():
+            self.items[self.front] = item
+            self.front = (self.front - 1 + MAX_SIZE) % MAX_SIZE
+
+    def addRear(self, item):
+        self.enqueue(item)
+
+    def deleteFront(self):
+        return self.dequeue()
+
+    def deleteRear(self):
+        if not self.isEmpty():
+            item = self.items[self.rear]
+            self.rear = ((self.rear - 1) + MAX_SIZE) % MAX_SIZE
+            return item
+    def getFront(self):
+        return self.peek()
+
+    def getRear(self):
+        return self.items[self.rear]
 
 
 
