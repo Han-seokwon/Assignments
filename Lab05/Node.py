@@ -20,17 +20,14 @@ class Node2:
         self.prev = prev
         self.data = data
         self.next = next
-
     def __str__(self):
         return str(self.data)
-
     def getPrev(self):
         return self.prev
     def getNext(self):
         return self.next
     def getData(self):
         return self.data
-
     def setPrev(self):
         return self.prev
     def setNext(self, next):

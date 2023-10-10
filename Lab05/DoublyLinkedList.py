@@ -1,5 +1,6 @@
 from Node import Node2
 
+
 class DoublyLinkedList:
     def __init__(self):
         self.head =None
@@ -42,7 +43,6 @@ class DoublyLinkedList:
 
     def clear(self):
         self.head = None
-
 
     def addFront(self, data):
         new_node = Node2(None, data, None)

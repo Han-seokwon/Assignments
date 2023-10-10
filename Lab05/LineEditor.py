@@ -1,5 +1,6 @@
 from SinglyLinkedList import *
 
+
 class LineEditor:
     def __init__(self):
         self.list = SinglyLinkedList()
@@ -21,18 +22,28 @@ class LineEditor:
                 self.writeToFile()
             elif command == 'q':
                 return 0
+            else:
+                print("Invalid input : ", command)
 
+    def inputLineNumber(self):
+        while True:
+            try:
+                pos = int(input("input line number : "))
+            except:
+                print("Invalid input")
+            else:
+                return pos
     def addLine(self):
-        pos = int(input("input line number : "))
+        pos = self.inputLineNumber()
         str = input("input line text : ")
         self.list.addAt(pos, str)
 
     def deleteLine(self):
-        pos = int(input("input line number : "))
+        pos = self.inputLineNumber()
         self.list.deleteAt(pos)
 
     def replaceLine(self):
-        pos = int(input("input line number : "))
+        pos = self.inputLineNumber()
         str = input("input modified text : ")
         self.list.replaceDataAt(pos, str)
 

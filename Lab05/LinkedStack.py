@@ -19,11 +19,14 @@ class LinkedStack:
         self.head = new_node  # make new_node as head
 
     def pop(self):
-        temp = self.head
-        if self.head:
+        if self.isEmpty():
+            print("Stack is empty..")
+            return None
+        else:
+            temp = self.head
             self.head = self.head.next
             temp.next = None
-        return temp
+            return temp
 
     def peek(self):
         return self.head
@@ -65,9 +68,3 @@ class LinkedStack:
 
     def clear(self):
         self.head = None
-
-
-
-
-
-

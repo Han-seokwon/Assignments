@@ -1,5 +1,6 @@
 from CircularLinkedList import *
 
+
 class JosephusProblem:
     def __init__(self, n =10, m=3):
         self.list = CircularLinkedList()

@@ -1,5 +1,6 @@
 from DoublyLinkedList import *
 import copy
+
 class Term:
     def __init__(self, sign=None, coeff=None,  expon=None):
         self.sign = sign
@@ -18,45 +19,6 @@ class Term:
 class SparsePolynomial(DoublyLinkedList):
     def __init__(self):
         super().__init__()
-
-
-    def add(self, B):
-        result_Poly = copy.deepcopy(self) # copy this Poly to result Poly
-        aNode = result_Poly.head
-        bNode = B.head
-        idx = 0 # result_Poly index
-        while bNode is not None:
-            aTerm = aNode.data
-            bTerm = bNode.data
-            if(aTerm.expon < bTerm.expon):
-                aNode = aNode.next
-                idx += 1
-            elif(aTerm.expon > bTerm.expon):
-                result_Poly.addAt(idx, bTerm)
-                bNode = bNode.next
-                idx += 1
-            else: # aTerm.expon == bTerm.expon
-                result = float(aTerm.sign + str(aTerm.coeff)) + float(bTerm.sign + str(bTerm.coeff))
-                if result > 0 : # positive
-                    aTerm.sign = '+'  # change sign
-                    aTerm.coeff = result
-                elif result < 0 : # negative
-                    aTerm.sign = '-' # change sign
-                    aTerm.coeff = abs(result)
-                else: # delete node if coeff is 0
-                    result_Poly.deleteAt(idx)
-                bNode = bNode.next
-        return result_Poly
-
-
-    def sub(self, B):
-        B_temp = copy.deepcopy(B) # copy B Poly to temp Poly
-        temp = B_temp.head
-        while temp is not None:
-            temp.data.sign = '+' if temp.data.sign == '-' else '-' # change sign
-            temp = temp.next
-        return self.add(B_temp)
-
     def getDegree(self): # return highest exponential
         temp = self.head
         max_degree = temp.data.expon
@@ -91,6 +53,54 @@ class SparsePolynomial(DoublyLinkedList):
                     tokenList.append(Term(token[0], float(token[1]), int(token[2])))
                 except:
                     print("Invaild Input : " , token)
+
+    def add(self, B):
+        # Each term in A and B is arranged in ascending order by exponent
+        # Added term of A and B to "result_Poly" according to exponential order
+        result_Poly = SparsePolynomial()
+        aNode = self.head
+        bNode = B.head
+        while aNode is not None or bNode is not None:
+            if aNode is None: # Add all remaining nodes in B to 'result_Poly'
+                while bNode:
+                    result_Poly.addRear(bNode.data)
+                    bNode = bNode.next
+                break
+            if bNode is None: # Add all remaining nodes in A to 'result_Poly'
+                while aNode:
+                    result_Poly.addRear(aNode.data)
+                    aNode = aNode.next
+                break
+            a_term = aNode.data
+            b_term = bNode.data
+            # Add data of Node with smaller exponent to 'result_Poly'
+            if a_term.expon < b_term.expon:
+                result_Poly.addRear(aNode.data)
+                aNode = aNode.next
+            elif a_term.expon > b_term.expon:
+                result_Poly.addRear(bNode.data)
+                bNode = bNode.next
+            else: # a_term.expon == b_term.expon
+                result_coeff = float(a_term.sign + str(a_term.coeff)) + float(b_term.sign + str(b_term.coeff))
+                if result_coeff > 0 : # positive
+                    result_Poly.addRear(Term("+" , result_coeff, a_term.expon))
+                elif result_coeff < 0 : # negative
+                    result_Poly.addRear(Term("-" , abs(result_coeff), a_term.expon))
+                # If the coefficient is zero, do not add it to 'result_Poly'
+                aNode = aNode.next
+                bNode = bNode.next
+        return result_Poly
+
+
+    def sub(self, B):
+        B_temp = copy.deepcopy(B) # copy B Poly to temp Poly
+        temp = B_temp.head
+        while temp is not None:
+            temp.data.sign = '+' if temp.data.sign == '-' else '-' # change sign
+            temp = temp.next
+        return self.add(B_temp)
+
+
 
 
 

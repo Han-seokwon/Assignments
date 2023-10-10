@@ -4,6 +4,12 @@ from CircularLinkedList import *
 from LineEditor import *
 from SparsePolynomial import *
 from JosephusProblem import *
+from LinkedStack import *
+from LinkedQueue import *
+from LinkedDeque import *
+
+
+
 def testNodes():
 
     d = Node(100, None)
@@ -48,6 +54,38 @@ def testLineEditor():
     le = LineEditor()
     le.runLineEditor()
 
+
+def testLinkedStackQueueDeque():
+    lstack = LinkedStack()
+    print("lstack = LinkedStack()")
+    for i in range(5):
+        lstack.push(i)
+    print("lstack : ", lstack)
+    print("lstack.pop() : ", lstack.pop())
+    print("lstack : ", lstack)
+
+    print()
+    lqueue = LinkedQueue()
+    print("lqueue = LinkedQueue()")
+    for i in range(5):
+        lqueue.enqueue(i)
+    print("lqueue : ", lqueue)
+    print("lqueue.dequeue() : ", lqueue.dequeue())
+    print("lqueue : ", lqueue)
+
+    print()
+    ldeque = LinkedDeque()
+    print("ldeque = LinkedDeque()")
+    for i in range(5):
+        ldeque.addFront(i)
+    print("ldeque : ", ldeque)
+    ldeque.addRear(10)
+    print("ldeque.addRear(10) : ", ldeque)
+    print("ldeque.deleteRear() : ", ldeque.deleteRear())
+    print("ldeque.deleteFront() : ", ldeque.deleteFront())
+    print("ldeque : ", ldeque)
+
+
 def testDoublyLinkedList():
     dList = DoublyLinkedList()
     for i in range(1, 10):
@@ -87,6 +125,9 @@ def testPoly():
     b.read()
     a.display(" A = ")
     b.display(" B = ")
+
+    print("a.getDegree() : ", a.getDegree())
+    print("b.getDegree() : ", b.getDegree())
 
     c = a.add(b)
     c.display(" A + B = ")
@@ -143,11 +184,12 @@ def testJosephusProblem():
 def main():
     # testNodes()
     # testSinglyLinkedList()
-    # testLineEditor()
+    testLineEditor()
+    # testLinkedStackQueueDeque()
     # testDoublyLinkedList()
     # testPoly()
     # testCircularLinkedList()
-    testJosephusProblem()
+    # testJosephusProblem()
 
 if __name__ == "__main__":
     main()
