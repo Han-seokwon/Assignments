@@ -63,20 +63,20 @@ class DoublyLinkedList:
             temp.next = Node2(temp, data, None) # create node & link to tail
 
     def addAt(self, pos, data):
-        if pos == self.getSize():
-            self.addRear(data)
-        elif pos == 0:
-            self.addFront(data)
+        if (pos < 0 or pos > self.getSize()):
+            print("Invalid position")
+            return None
         else:
-            before = self.getNodeAt(pos -1)
-            if before == None:
-                print("This node doesn't exist in DLL")
+            if pos == self.getSize() - 1:
+                self.addRear(data)
+            elif pos == 0:
+                self.addFront(data)
             else:
+                before = self.getNodeAt(pos -1)
                 new_node = Node2(before, data, before.next)
                 before.next = new_node
                 if new_node is not None:
                     new_node.next.prev = new_node
-
 
     def deleteAtFront(self):
         if self.isEmpty():
@@ -113,10 +113,9 @@ class DoublyLinkedList:
             print("List is empty..")
             return None
         else:
-            temp = None
             if pos == 0:
                 temp = self.deleteAtFront()
-            elif pos == self.getSize():
+            elif pos == self.getSize() - 1:
                 temp = self.deleteAtRear()
             else:
                 before = self.getNodeAt(pos - 1)

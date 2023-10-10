@@ -21,27 +21,33 @@ class SparsePolynomial(DoublyLinkedList):
 
 
     def add(self, B):
-        result_Poly = copy.deepcopy(self) # copy self Poly to result Poly
+        result_Poly = copy.deepcopy(self) # copy this Poly to result Poly
         aNode = result_Poly.head
         bNode = B.head
-        idx = 0
+        idx = 0 # result_Poly index
         while bNode is not None:
             aTerm = aNode.data
             bTerm = bNode.data
             if(aTerm.expon < bTerm.expon):
                 aNode = aNode.next
                 idx += 1
-                continue
             elif(aTerm.expon > bTerm.expon):
                 result_Poly.addAt(idx, bTerm)
+                bNode = bNode.next
+                idx += 1
             else: # aTerm.expon == bTerm.expon
-                coeff = float(aTerm.sign + str(aTerm.coeff)) + float(bTerm.sign + str(bTerm.coeff))
-                if coeff == 0:
-                    result_Poly.deleteAt(idx) # delete node if coeff is 0
-                else:
-                    aNode.data.coeff = coeff
-            bNode = bNode.next
+                result = float(aTerm.sign + str(aTerm.coeff)) + float(bTerm.sign + str(bTerm.coeff))
+                if result > 0 : # positive
+                    aTerm.sign = '+'  # change sign
+                    aTerm.coeff = result
+                elif result < 0 : # negative
+                    aTerm.sign = '-' # change sign
+                    aTerm.coeff = abs(result)
+                else: # delete node if coeff is 0
+                    result_Poly.deleteAt(idx)
+                bNode = bNode.next
         return result_Poly
+
 
     def sub(self, B):
         B_temp = copy.deepcopy(B) # copy B Poly to temp Poly
@@ -70,14 +76,19 @@ class SparsePolynomial(DoublyLinkedList):
 
     def read(self):
         self.clear()
+        tokenList = []
         while True:
             token = input("input term (syn coef expon): ").strip().split(" ")
             if token[0] == '-1':
+                # Sorted by exponent in case the user entered by mixing the exponent
+                tokenList = sorted(tokenList, key=lambda term : term.expon, reverse=True)
+                for i in range(len(tokenList)):
+                    self.addFront(tokenList[i])
                 self.display("The Polynomial: ")
                 return 0
             else:
                 try:
-                    self.addAt(self.getSize(), Term(token[0], float(token[1]), int(token[2])))
+                    tokenList.append(Term(token[0], float(token[1]), int(token[2])))
                 except:
                     print("Invaild Input : " , token)
 
