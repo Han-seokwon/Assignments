@@ -1,23 +1,57 @@
+from Node import Node2
 
-from Node import Node
-
-class SinglyLinkedList:
+class DoublyLinkedList:
     def __init__(self):
-        self.head = None
+        self.head =None
 
     def __str__(self):
         temp = self.head
         string_repr = ""
         while temp:
-            string_repr += str(temp) + "->"
+            string_repr += str(temp) + " <-> "
             temp = temp.next
         return string_repr + "END"
 
+    def getNodeAt(self, pos):
+        if(pos < 0 or pos > self.getSize()):
+            print("Invalid position")
+            return None
+        temp = self.head
+        while pos > 0 and temp != None:
+            temp = temp.next
+            pos -= 1
+        return temp
+
+    def getDataAt(self, pos):
+        node = self.getNodeAt(pos)
+        if node is None:
+            return None
+        else:
+            return node.data
+
+    def getSize(self):
+        cnt = 0
+        temp = self.head
+        while temp:
+            temp = temp.next
+            cnt += 1
+        return cnt
+
+    def isEmpty(self) -> bool:
+        return self.head == None
+
+    def clear(self):
+        self.head = None
+
+
     def addFront(self, data):
-        new_node = Node(data)
-        if self.head:
-            new_node.next = self.head # link new_node to head
-        self.head = new_node # make new_node as head
+        new_node = Node2(None, data, None)
+        if self.head is None:
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
 
     def addRear(self, data):
         if self.head is None:
@@ -26,9 +60,9 @@ class SinglyLinkedList:
             temp = self.head
             while temp.next: # traverse to last node
                 temp = temp.next
-            temp.next = Node(data, None) # create node & link to tail
+            temp.next = Node2(temp, data, None) # create node & link to tail
 
-    def addAt(self, pos ,data):
+    def addAt(self, pos, data):
         if pos == self.getSize():
             self.addRear(data)
         elif pos == 0:
@@ -36,20 +70,25 @@ class SinglyLinkedList:
         else:
             before = self.getNodeAt(pos -1)
             if before == None:
-                print("This node doesn't exist in SLL")
+                print("This node doesn't exist in DLL")
             else:
-                new_node = Node(data, before.next)
+                new_node = Node2(before, data, before.next)
                 before.next = new_node
+                if new_node is not None:
+                    new_node.next.prev = new_node
+
 
     def deleteAtFront(self):
         if self.isEmpty():
             print("List is empty..")
             return None
+        temp = self.head
+        if self.head.next is None: # just one node in list
+            self.head = None
         else:
-            temp = self.head
-            self.head = self.head.next
-            temp.next = None
-            return temp
+            self.head = temp.next
+            self.head.prev = None
+        return temp
 
     def deleteAtRear(self):
         if self.isEmpty():
@@ -60,11 +99,10 @@ class SinglyLinkedList:
             if self.head.next is None:
                 self.head = None
             else:
-                while temp.next.next:
+                while temp.next:
                     temp = temp.next
-                second_last = temp
-                temp = temp.next # temp : last node
-                second_last.next = None
+                temp.prev.next = None  # temp : last node
+                temp.prev = None
             return temp
 
     def deleteAt(self, pos):
@@ -82,41 +120,11 @@ class SinglyLinkedList:
                 temp = self.deleteAtRear()
             else:
                 before = self.getNodeAt(pos - 1)
-                temp = before.next # delete Node
+                temp = before.next # temp : delete Node
                 before.next = temp.next
-                temp.next = None
+                temp.next.prev = before
+                temp.next = temp.prev = None
             return temp
-
-    def getNodeAt(self, pos):
-        if(pos < 0 or pos > self.getSize()):
-            print("Invalid position")
-            return None
-        node = self.head
-        while pos > 0 and node != None:
-            node = node.next
-            pos -= 1
-        return node
-
-    def getDataAt(self, pos):
-        node = self.getNodeAt(pos)
-        if node == None:
-            return None
-        else:
-            return node.data
-
-    def getSize(self):
-        cnt = 0
-        temp = self.head
-        while temp:
-            temp = temp.next
-            cnt+=1
-        return cnt
-
-    def isEmpty(self) -> bool:
-        return self.head == None
-
-    def clear(self):
-        self.head = None
 
     def replaceDataAt(self, pos, data):
         node = self.getNodeAt(pos)
@@ -128,14 +136,14 @@ class SinglyLinkedList:
         temp = self.head
         while temp:
             next_node = temp.next # Store the current node's next node.
-            temp.next = before # Make the current node's next point backwards
+            temp.next = temp.prev # Make the current node's next point backwards
+            temp.prev = next_node # Make the current node's prev point forwards
             before = temp  # Make the previous node be the current node
-            temp = next_node # Make the current node the next node
+            temp = next_node # Make the current node be the next node
 
-        self.head = before # Set before node in order to put the head  at the end
+        self.head = before # Set before node(which was the last node) in order to put the head at the end
 
-
-    def printList(self, msg="Singly Linked List: ") -> None:
+    def printList(self, msg="Doubly Linked List: ") -> None:
         print(msg, str(self))
 
     def findData(self, data):

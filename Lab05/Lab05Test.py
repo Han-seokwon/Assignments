@@ -1,5 +1,7 @@
 from SinglyLinkedList import *
-
+from DoublyLinkedList import *
+from LineEditor import *
+from SparsePolynomial import *
 def testNodes():
 
     d = Node(100, None)
@@ -14,12 +16,14 @@ def testSinglyLinkedList():
     list = SinglyLinkedList()
     for i in range(1, 10):
         list.addFront(i*10)
-    print(list)
+    list.printList()
 
     list.addAt(4, 55)
+    print("list.addAt(4, 55) : ", list)
     list.addAt(list.getSize(), 1)
+    print("list.addAt(list.getSize(), 1) : ", list)
     list.addRear(0)
-    print(list)
+    print("list.addRear(0) : ", list)
 
     print("list.deleteAtFront() : ", list.deleteAtFront())
     print("list.deleteAtRear() : ", list.deleteAtRear())
@@ -31,16 +35,64 @@ def testSinglyLinkedList():
     print("findData(40) : ", list.findData(40))
 
     list.replaceDataAt(2, 500)
-    print("replaceDataAt(2, 500) -> ", list)
+    print("replaceDataAt(2, 500) : ", list)
 
     list.reverseList()
-    print("reverseList() -> ", list)
+    print("reverseList() : ", list)
+
+def testLineEditor():
+    le = LineEditor()
+    le.runLineEditor()
+
+def testDoublyLinkedList():
+    dList = DoublyLinkedList()
+    for i in range(1, 10):
+        dList.addFront(i*10)
+    dList.printList()
+
+    dList.addAt(4, 55)
+    print("dList.addAt(4, 55) : ", dList)
+    dList.addAt(dList.getSize(), 1)
+    print("dList.addAt(dList.getSize(), 1) : ", dList)
+    dList.addRear(0)
+    print("dList.addRear(0) : ", dList)
+
+    print("dList.deleteAtFront() : ", dList.deleteAtFront())
+    print("dList.deleteAtRear() : ", dList.deleteAtRear())
+    print("dList.deleteAt(4) : ", dList.deleteAt(4))
+    print(dList)
+
+    print("dList.getNodeAt(3) : ", dList.getNodeAt(3))
+    print("dList.getDataAt(3) : ", dList.getDataAt(3))
+    print("findData(40) : ", dList.findData(40))
+
+    dList.replaceDataAt(2, 500)
+    print("replaceDataAt(2, 500) : ", dList)
+
+    dList.reverseList()
+    print("reverseList() : ", dList)
 
 
+def testPoly():
+
+    a = SparsePolynomial()
+    a.read()
+    b = SparsePolynomial()
+    b.read()
+    a.display(" A = ")
+    b.display(" B = ")
+
+    c = a.add(b)
+    c.display(" A + B = ")
+    d = a.sub(b)
+    d.display(" A - B = ")
 
 def main():
     # testNodes()
-    testSinglyLinkedList()
+    # testSinglyLinkedList()
+    # testLineEditor()
+    # testDoublyLinkedList()
+    testPoly()
 
 if __name__ == "__main__":
     main()
