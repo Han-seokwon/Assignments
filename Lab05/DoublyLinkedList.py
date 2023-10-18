@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 class Node2:
     def __init__(self, prev=None, data=None, next=None):
         self.prev = prev
@@ -14,26 +14,19 @@ class Node2:
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
-=======
+
 from Node import Node2
 
 
 class DoublyLinkedList:
     def __init__(self):
         self.head =None
->>>>>>> origin/main
 
     def __str__(self):
         temp = self.head
         string_repr = ""
         while temp:
-<<<<<<< HEAD
             string_repr += str(temp) + "->"
-            temp = temp.next
-        return string_repr + "END"
-
-=======
-            string_repr += str(temp) + " <-> "
             temp = temp.next
         return string_repr + "END"
 
@@ -176,32 +169,6 @@ class DoublyLinkedList:
                 return node
             node = node.next
         return None
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> origin/main
-
 
 
 

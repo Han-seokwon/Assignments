@@ -120,7 +120,7 @@ class TicTacToe:
             else:
                 turn = 'O'
             print("\nTurn for player {} ".format(turn))
-            pos = self.getInput();  # position entered by the user
+            pos = self.getInput()  # position entered by the user
             self.board[pos] = "O" if turn == "O" else "X"
             move += 1
             if move > 3:  # winner may be determined when moved at least three times
@@ -143,7 +143,8 @@ class TicTacToe:
             if (self.board[each[0] - 1] == self.board[each[1] - 1] and
                 self.board[each[1] - 1] == self.board[each[2] - 1]):
                 return self.board[each[0] - 1]
-        return -1 # draw
+        return -1  # draw
+
     def getInput(self):
         while True:
             self.printBoard()
@@ -158,6 +159,7 @@ class TicTacToe:
                 print("The position has already been selected")
             else: # Input is valid
                 return pos
+
     def printBoard(self):
         for i in range(0, len(self.board), 3):
             print(self.board[i:i + 3])

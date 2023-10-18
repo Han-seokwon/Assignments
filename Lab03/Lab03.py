@@ -1,8 +1,4 @@
-"""
-Name : Han Seokwon
-Student ID : 2020180117
-Description :  This moudle contains the ADT for Lab03
-"""
+
 class StackApp:
     def convertBase(self, num):
         s = Stack()

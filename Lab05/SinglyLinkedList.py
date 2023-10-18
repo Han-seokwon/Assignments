@@ -34,10 +34,10 @@ class SinglyLinkedList:
             print("Invalid position")
             return None
         else:
-            if pos == self.getSize() -1 :
-                self.addRear(data)
-            elif pos == 0:
+            if pos == 0:
                 self.addFront(data)
+            elif pos == self.getSize():
+                self.addRear(data)
             else:
                 before = self.getNodeAt(pos -1)
                 new_node = Node(data, before.next)
@@ -70,7 +70,7 @@ class SinglyLinkedList:
             return temp
 
     def deleteAt(self, pos):
-        if pos < 0 or pos > self.getSize():
+        if pos < 0 or pos >= self.getSize():
             print("Invalid position")
             return None
         elif self.isEmpty():
@@ -89,7 +89,7 @@ class SinglyLinkedList:
             return temp
 
     def getNodeAt(self, pos):
-        if(pos < 0 or pos > self.getSize()):
+        if(pos < 0 or pos > self.getSize()-1):
             print("Invalid position")
             return None
         node = self.head
@@ -125,6 +125,7 @@ class SinglyLinkedList:
             node.data = data
 
     def reverseList(self):
+        # method1
         before = None
         temp = self.head
         while temp:
@@ -135,6 +136,16 @@ class SinglyLinkedList:
 
         self.head = before # Set before node in order to put the head  at the end
 
+        # method2
+        # head node will be go to rear making next addFront
+        # if self.head:
+        #     head = self.head
+        #     while head.next:
+        #         next_node = head.next
+        #         head.next = next_node.next
+        #         # self.addFront(next_node) #
+        #         next_node.next = self.head
+        #         self.head = next_node
 
     def printList(self, msg="Singly Linked List: ") -> None:
         print(msg, str(self))
