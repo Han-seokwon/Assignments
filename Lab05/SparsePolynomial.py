@@ -20,8 +20,8 @@ class SparsePolynomial(DoublyLinkedList):
     def __init__(self):
         super().__init__()
     def getDegree(self): # return highest exponential
+        max_degree = self.head.expon
         temp = self.head
-        max_degree = temp.data.expon
         while temp is not None:
             if temp.data.expon > max_degree:
                 max_degree = temp.data.expon

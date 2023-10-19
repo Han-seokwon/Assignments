@@ -29,7 +29,7 @@ def testSinglyLinkedList():
 
     list.addAt(4, 55)
     print("list.addAt(4, 55) : ", list)
-    list.addAt(list.getSize()-1, 1)
+    list.addAt(list.getSize(), 1)
     print("list.addAt(list.getSize()-1, 1) : ", list)
     list.addRear(0)
     print("list.addRear(0) : ", list)
@@ -116,7 +116,6 @@ def testDoublyLinkedList():
     dList.reverseList()
     print("reverseList() : ", dList)
 
-
 def testPoly():
 
     a = SparsePolynomial()
@@ -136,46 +135,50 @@ def testPoly():
 
 
 def testCircularLinkedList():
+    # cList = CircularLinkedList()
+    # for i in range(1, 10):
+    #     cList.addRear(i*10)
+    # print(" for i in range(1, 10): cList.addRear(i*10)")
+    # cList.printList()
+    # print("cList.head.next : ", cList.head.next , ", cList.head : ", cList.head )
+    #
+    # print()
+    #
+    # cList.addAt(4, 55)
+    # print("cList.addAt(4, 55) : ", cList)
+    # cList.addAt(cList.getSize()-1, 100)
+    # print("cList.addAt(cList.getSize()-1, 100) : ", cList)
+    # cList.addRear(200)
+    # print("cList.addRear(200) : ", cList)
+    #
+    # print()
+    #
+    # print("cList.deleteAtFront() : ", cList.deleteAtFront())
+    # print(cList)
+    # print("cList.deleteAtRear() : ", cList.deleteAtRear())
+    # print(cList)
+    # print("cList.deleteAt(4) : ", cList.deleteAt(4))
+    # print(cList)
+    # print("cList.deleteAt(cList.getSize()-1) : ", cList.deleteAt(cList.getSize() - 1))
+    # print(cList)
+    #
+    # print()
+    #
+    # print("cList.getNodeAt(3) : ", cList.getNodeAt(3))
+    # print("cList.getDataAt(3) : ", cList.getDataAt(3))
+    # print("findData(40) : ", cList.findData(40))
+    # cList.replaceDataAt(2, 500)
+    # print("replaceDataAt(2, 500) : ", cList)
+    #
+    # print()
+    #
+    # print("cList.findPos(cList.head) : " , cList.findPos(cList.head), ", cList.head : ", cList.head)
+    # print("cList.findPos(cList.head.next): ", cList.findPos(cList.head.next), ", cList.head.next : ", cList.head.next)
+    # print("cList.findPos(Node(-1)): ", cList.findPos(Node(-1)))
+
     cList = CircularLinkedList()
-    for i in range(1, 10):
-        cList.addRear(i*10)
-    print(" for i in range(1, 10): cList.addRear(i*10)")
-    cList.printList()
-    print("cList.head.next : ", cList.head.next , ", cList.head : ", cList.head )
-
-    print()
-
-    cList.addAt(4, 55)
-    print("cList.addAt(4, 55) : ", cList)
-    cList.addAt(cList.getSize()-1, 100)
-    print("cList.addAt(cList.getSize()-1, 100) : ", cList)
-    cList.addRear(200)
-    print("cList.addRear(200) : ", cList)
-
-    print()
-
-    print("cList.deleteAtFront() : ", cList.deleteAtFront())
-    print(cList)
-    print("cList.deleteAtRear() : ", cList.deleteAtRear())
-    print(cList)
-    print("cList.deleteAt(4) : ", cList.deleteAt(4))
-    print(cList)
-    print("cList.deleteAt(cList.getSize()-1) : ", cList.deleteAt(cList.getSize() - 1))
-    print(cList)
-
-    print()
-
-    print("cList.getNodeAt(3) : ", cList.getNodeAt(3))
-    print("cList.getDataAt(3) : ", cList.getDataAt(3))
-    print("findData(40) : ", cList.findData(40))
-    cList.replaceDataAt(2, 500)
-    print("replaceDataAt(2, 500) : ", cList)
-
-    print()
-
-    print("cList.findPos(cList.head) : " , cList.findPos(cList.head), ", cList.head : ", cList.head)
-    print("cList.findPos(cList.head.next): ", cList.findPos(cList.head.next), ", cList.head.next : ", cList.head.next)
-    print("cList.findPos(Node(-1)): ", cList.findPos(Node(-1)))
+    cList.addFront(10)
+    print(cList.deleteAt(0))
 
 def testJosephusProblem():
     josep = JosephusProblem()
@@ -184,11 +187,11 @@ def testJosephusProblem():
 def main():
     # testNodes()
     # testSinglyLinkedList()
-    testLineEditor()
+    # testLineEditor()
     # testLinkedStackQueueDeque()
     # testDoublyLinkedList()
     # testPoly()
-    # testCircularLinkedList()
+    testCircularLinkedList()
     # testJosephusProblem()
 
 if __name__ == "__main__":

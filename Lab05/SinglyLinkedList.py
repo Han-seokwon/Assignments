@@ -89,14 +89,18 @@ class SinglyLinkedList:
             return temp
 
     def getNodeAt(self, pos):
-        if(pos < 0 or pos > self.getSize()-1):
+        if self.isEmpty():
+            print("list is empty")
+            return None
+        elif(pos < 0 or pos > self.getSize()-1):
             print("Invalid position")
             return None
-        node = self.head
-        while pos > 0 and node != None:
-            node = node.next
-            pos -= 1
-        return node
+        else:
+            node = self.head
+            while pos > 0:
+                node = node.next
+                pos -= 1
+            return node
 
     def getDataAt(self, pos):
         node = self.getNodeAt(pos)
@@ -143,7 +147,7 @@ class SinglyLinkedList:
         #     while head.next:
         #         next_node = head.next
         #         head.next = next_node.next
-        #         # self.addFront(next_node) #
+        #         # self.addFront(next_node) # the same code as the two lines below
         #         next_node.next = self.head
         #         self.head = next_node
 

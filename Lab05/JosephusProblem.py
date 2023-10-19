@@ -17,10 +17,10 @@ class JosephusProblem:
             temp = temp.next
             count += 1
             if count == self.m:
-                temp2 = temp.next
+                nextStartNode = temp.next
                 pos = self.list.findPos(temp)
                 print("Eliminated -> ", self.list.deleteAt(pos))
-                temp = temp2
+                temp = nextStartNode
                 print(self.list)
                 count = 0
 

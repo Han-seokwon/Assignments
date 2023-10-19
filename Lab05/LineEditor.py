@@ -1,5 +1,5 @@
 from SinglyLinkedList import *
-<<<<<<< HEAD
+
 class LineEditor:
     def __init__(self):
         self.list = SinglyLinkedList()
@@ -33,7 +33,6 @@ class LineEditor:
 
     def replaceLine(self):
         pass
-=======
 
 
 class LineEditor:
@@ -104,5 +103,4 @@ class LineEditor:
             size = self.list.getSize()
             for i in range(size):
                 outFile.write(self.list.getDataAt(i) + '\n')
->>>>>>> origin/main
 

@@ -1,6 +1,4 @@
 from Node import Node
-
-
 class CircularLinkedList:
     def __init__(self):
         self.head =None
@@ -20,7 +18,6 @@ class CircularLinkedList:
         new_node = Node(data, None)
         if self.head is None:
             self.head = new_node
-            new_node.next = self.head
             self.head.next = self.head
         else:
             new_node.next = self.head.next
@@ -30,7 +27,6 @@ class CircularLinkedList:
         new_node = Node(data, None)
         if self.head is None:
             self.head = new_node
-            new_node.next = self.head
             self.head.next = self.head
         else:
             new_node.next = self.head.next
@@ -42,27 +38,26 @@ class CircularLinkedList:
             print("Invalid position")
             return None
         else:
-            if pos == self.getSize() -1 :
-                self.addRear(data)
-            elif pos == 0:
+            if pos == 0:
                 self.addFront(data)
+            elif pos == self.getSize():
+                self.addRear(data)
             else:
                 before = self.getNodeAt(pos -1)
-                new_node = Node(data, before.next)
-                before.next = new_node
+                before.next = Node(data, before.next)
 
     def deleteAtFront(self):
         if self.isEmpty():
             print("List is empty..")
             return None
+        temp = self.head.next
         if self.head == self.head.next: # only one node in list
             self.head = None
-            return self.head
         else:
             temp = self.head.next
             self.head.next = temp.next
             temp.next = None
-            return temp
+        return temp
 
     def deleteAtRear(self):
         if self.isEmpty():
@@ -97,7 +92,6 @@ class CircularLinkedList:
                 before.next = temp.next
                 temp.next = None
             return temp
-
 
     def getSize(self):
         cnt = 0

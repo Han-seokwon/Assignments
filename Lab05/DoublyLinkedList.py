@@ -31,14 +31,18 @@ class DoublyLinkedList:
         return string_repr + "END"
 
     def getNodeAt(self, pos):
-        if(pos < 0 or pos > self.getSize()):
+        if self.isEmpty():
+            print("list is empty")
+            return None
+        elif(pos < 0 or pos > self.getSize()):
             print("Invalid position")
             return None
-        temp = self.head
-        while pos > 0 and temp != None:
-            temp = temp.next
-            pos -= 1
-        return temp
+        else:
+            temp = self.head
+            while pos > 0:
+                temp = temp.next
+                pos -= 1
+            return temp
 
     def getDataAt(self, pos):
         node = self.getNodeAt(pos)
@@ -105,6 +109,7 @@ class DoublyLinkedList:
         else:
             self.head = temp.next
             self.head.prev = None
+            temp.next = None
         return temp
 
     def deleteAtRear(self):
@@ -123,7 +128,7 @@ class DoublyLinkedList:
             return temp
 
     def deleteAt(self, pos):
-        if pos < 0 or pos > self.getSize():
+        if pos < 0 or pos >= self.getSize():
             print("Invalid position")
             return None
         elif self.isEmpty():
@@ -131,16 +136,15 @@ class DoublyLinkedList:
             return None
         else:
             if pos == 0:
-                temp = self.deleteAtFront()
+                del_node = self.deleteAtFront()
             elif pos == self.getSize() - 1:
-                temp = self.deleteAtRear()
+                del_node = self.deleteAtRear()
             else:
-                before = self.getNodeAt(pos - 1)
-                temp = before.next # temp : delete Node
-                before.next = temp.next
-                temp.next.prev = before
-                temp.next = temp.prev = None
-            return temp
+                del_node = self.getNodeAt(pos - 1)
+                del_node.prev.next = del_node.next
+                del_node.next.prev = del_node.prev
+                del_node.next = del_node.prev = None
+            return del_node
 
     def replaceDataAt(self, pos, data):
         node = self.getNodeAt(pos)
