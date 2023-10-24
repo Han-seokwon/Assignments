@@ -50,7 +50,7 @@ class StackApp:
                     else:
                         break
                 s.push(term)
-            else:
+            else: # nums
                 output.append(term)
         # Append all remaining elements to output
         while not s.isEmpty():
