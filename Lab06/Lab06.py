@@ -1,11 +1,10 @@
 from BinaryNode import *
 import random
 
-
-def testBinaryNode():
-    root = BinaryNode(14)
+def createRandomTree(node_count, startValue , endValue):
+    root = BinaryNode(random.randrange(startValue, endValue))
     for i in range(10): # creating random nodes and add to tree
-        randNum = random.randrange(0, 20)
+        randNum = random.randrange(startValue, endValue)
         new_node = BinaryNode(randNum)
         tempRoot = root
         while True:
@@ -20,16 +19,44 @@ def testBinaryNode():
                 tempRoot = tempRoot.left if isLeft else tempRoot.right
                 continue
 
-    binaryTree = BinaryTree(root)
-    print(binaryTree)
+def testBinaryNode():
+    root = BinaryNode(14)
 
+    bt = BinaryTree()
+    bt.setRoot(root)
 
+    print()
+    bt.inOrder(bt.getRoot())
+    bt.printInOrder()
+
+    print()
+    bt.preOrder(bt.getRoot())
+    bt.printPreOrder()
+    bt.preOrder2(bt.getRoot())
+    print()
+
+    print()
+    bt.postOrder(bt.getRoot())
+    bt.printPostOrder()
+
+    bt.levelOrder(bt.getRoot())
+
+    print()
+    print(bt.countNode(bt.getRoot()))
+
+    print()
+    print(bt.count_leaf(bt.getRoot()))
+
+    print()
+    print(bt.get_height(bt.getRoot()))
 
 def main():
-    pass
+    testBinaryNode()
 
-if __name__ == " __main__":
+if __name__ == "__main__":
     main()
+
+
 
 
 
