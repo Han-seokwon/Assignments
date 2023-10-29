@@ -1,9 +1,5 @@
 from Lab03 import Stack, StackApp
-"""
-Name : Han Seokwon
-Student ID : 2020180117
-Description :  This module test the Classes defined in Lab03 Module
-"""
+
 def useStack():
     odd = Stack()
     even = Stack()
@@ -38,7 +34,7 @@ def useStackApp():
     print("Are brakets balanced? ", sa.checkBrakets(expr))
 
     # infix2Postfix() test
-    expr =  "2+(4+3*2+1)/3" # =  2432+*1+3/+
+    expr =  "2+(4+3*2+1)/3" # =  2432*+1+3/+
     print("Postfix Expression = ", sa.infix2Postfix(expr))
 
     # evalPostfix() test

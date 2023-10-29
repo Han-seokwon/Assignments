@@ -1,4 +1,4 @@
-from Queue import CircularQueue
+from Queue import Queue
 from Stack import Stack
 
 class BinaryTree:
@@ -24,6 +24,7 @@ class BinaryTree:
         print()
 
     def inOrder(self, node):
+        # left -> node -> right
         if node is not None:
             self.inOrder(node.getLeft())
             print(node, end=" -> ")
@@ -36,6 +37,7 @@ class BinaryTree:
         print()
 
     def preOrder(self, node):
+        # node -> left -> right
         if node is not None:
             print(node, end=" -> ")
             self.inOrder(node.getLeft())
@@ -49,28 +51,30 @@ class BinaryTree:
         print()
 
     def postOrder(self, node):
+        # left -> right -> node
         if node is not None:
             self.inOrder(node.getLeft())
             self.inOrder(node.getRight())
             print(node, end=" -> ")
 
-    def preOrder2(self, node):
+    def preOrder2(self, node): # using stack not recursive
         s = Stack()
         s.push(node)
         while not s.isEmpty():
-            temp_node = s.pop() # BinaryNode
+            temp_node = s.pop()
             if temp_node is not None:
-                print(temp_node, end=" ")
+                print(temp_node, end=" -> ")
+                # push right first then left in order to pop left first (LIFO)
                 s.push(temp_node.getRight())
                 s.push(temp_node.getLeft())
 
     def levelOrder(self, node):
-        que = CircularQueue()
+        que = Queue() # FIFO
         que.enqueue(node)
         while not que.isEmpty():
             temp_node = que.dequeue() # BinaryNode
             if temp_node is not None:
-                print(temp_node, end=" ")
+                print(temp_node, end=" -> ")
                 que.enqueue(temp_node.getLeft())
                 que.enqueue(temp_node.getRight())
 
@@ -80,8 +84,7 @@ class BinaryTree:
             return 0
         else:
             return 1 + self.countNode(node.getLeft()) + self.countNode(node.getRight())
-            # same
-            # return 1 + self.countNode(node.getLeft() + node.getRight())
+
 
     def isLeaf(self, node):
         return (node.getLeft() is None) and (node.getRight() is None)
@@ -96,9 +99,9 @@ class BinaryTree:
 
     def get_height(self, node):
         if node is None:
-            return -1 # if there is no Node in tree height is 0
+            return -1 # if there is no Node in tree height is -1
         hleft = self.get_height(node.getLeft())
-        hright = self.get_height(node.getRight)
+        hright = self.get_height(node.getRight())
         if hleft > hright:
             return hleft + 1
         else:
@@ -106,7 +109,7 @@ class BinaryTree:
 
     def get_levels(self, node):
         if node is None:
-            return -1 # if there is no Node in tree height is 0
+            return -1 # if there is no Node in tree level is -1
         hleft = self.get_levels(node.getLeft())
         hright = self.get_levels(node.getRight)
         if hleft > hright:
