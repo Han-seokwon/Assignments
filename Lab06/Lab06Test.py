@@ -1,23 +1,12 @@
-from BinaryNode import *
-import random
+from BinaryTree import *
+from BST import BinarySearchTree
 
-# def createRandomTree(node_count, startValue , endValue):
-#     root = BinaryNode(random.randrange(startValue, endValue))
-#     for i in range(10): # creating random nodes and add to tree
-#         randNum = random.randrange(startValue, endValue)
-#         new_node = BinaryNode(randNum)
-#         tempRoot = root
-#         while True:
-#             if tempRoot.left is None:
-#                 tempRoot.setLeft(new_node)
-#                 break
-#             elif tempRoot.right is None:
-#                 tempRoot.setRight(new_node)
-#                 break
-#             else:
-#                 isLeft = random.choice([True, False])
-#                 tempRoot = tempRoot.left if isLeft else tempRoot.right
-#                 continue
+def testBST():
+    bst1 = BinarySearchTree();
+    eleList = [3, 7, 12, 18 , 26, 27, 31]
+    for n in eleList:
+        bst1.insert_bts(n)
+    bst1.printInOrder()
 
 def testBinaryNode():
     # create test tree
@@ -74,8 +63,8 @@ def testBinaryNode():
     print("get_height() : ", bt.get_height(bt.getRoot()))
 
 def main():
-    testBinaryNode()
-
+    # testBinaryNode()
+    testBST()
 if __name__ == "__main__":
     main()
 
