@@ -1,6 +1,6 @@
 from BinaryTree import *
 from BST import BinarySearchTree
-
+from BTree import BTree
 def testBST():
     bst1 = BinarySearchTree();
     eleList = [3, 7, 12, 18 , 26, 27, 31]
@@ -62,9 +62,23 @@ def testBinaryNode():
     print()
     print("get_height() : ", bt.get_height(bt.getRoot()))
 
+
+
+def useBTree():
+    print("Btree")
+    btree = BTree(3)
+    keys = [10, 20, 34, 21, 90, 56, 62]
+    for key in keys:
+        btree.insert(key)
+        print()
+        btree.display()
+
+
 def main():
     # testBinaryNode()
-    testBST()
+    # testBST()
+    useBTree()
+
 if __name__ == "__main__":
     main()
 
