@@ -1,4 +1,5 @@
 from BST import *
+from queue import LifoQueue
 class Record:
     def __init__(self, word, meaning):
         self.word = word
@@ -27,17 +28,17 @@ class Dictionary(BinarySearchTree):
         self.searchMeaning(self.root, meaning)
 
     def searchMeaning(self, node, meaning):
-        s = Stack()
-        s.push(node)
-        while not s.isEmpty(): # preorder search
-            node = s.pop()
+        s = LifoQueue()
+        s.put(node)
+        while not s.empty(): # preorder search
+            node = s.get()
             if node is not None:
                 if node.getData().meaning == meaning:
                     print("Record is ---->> ", node)
                     return
                 else:
-                    s.push(node.getRight())
-                    s.push(node.getLeft())
+                    s.put(node.getRight())
+                    s.put(node.getLeft())
         print("The " + meaning + " is not found.")
 
     def runDict(self):

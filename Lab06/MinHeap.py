@@ -26,7 +26,8 @@ class MinHeap:
             hroot = self.heap[1]
             last = self.heap[self.getSize()]
             while child <= self.getSize() : # precolate down
-                if child < self.getSize() and self.getLeft(parent) > self.getRight(parent) : # if current node(child) == size == last node there is no left, right child
+                if child < self.getSize() and self.getLeft(parent) > self.getRight(parent) :
+                    # if current node(child) == size == last node there is no left, right child
                     child += 1 # move to smaller(right) node
                 if last <= self.heap[child]: # last is smaller than child(comparing) node stop
                     break
