@@ -1,3 +1,4 @@
+from collections import OrderedDict
 
 class Edge:
     def __init__(self, u=None, v=None, weight=None):
@@ -66,13 +67,17 @@ class Graph:
             gdict = {}
         self.gdict = gdict
         self.Directed = directed # 방향이 있는 그래프인지 정하는 필드
-        self.keyIndex = {}
+        self.keyIndex = {} # vertex list
 
     def __str__(self):
         gs = ""
         for vtx in self.gdict:
             gs += "{} : {}\n".format(vtx, self.gdict[vtx])
         return gs
+
+    def getVertexList(self):
+        orderedVertexList = OrderedDict(sorted(self.keyIndex.items()))
+        return list(orderedVertexList.keys())
 
     def getOrder(self):
         pass
@@ -87,13 +92,13 @@ class Graph:
         nlist = [] # neighbor list
         edgeList = self.gdict.get(vtx)
         for e in edgeList:
-            nlist.append(e.getV)
+            nlist.append(e.getV())
         return nlist
 
     def getAdjList(self):
         alist = {}
         for vtx in self.gdict:
-            alist[vtx] = set( self.getNeighbors(vtx))
+            alist[vtx] = set(self.getNeighbors(vtx))
         return alist
 
     def printAdjList(self):
@@ -131,7 +136,6 @@ class Graph:
             for e in self.gdict[vtx]:
                 edgeList.append(e)
         return edgeList
-
 
 
 

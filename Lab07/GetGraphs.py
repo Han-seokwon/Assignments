@@ -1,6 +1,6 @@
 from Graph import *
 class GetGraphs:
-    def getG1(self):
+    def getG1(self): # unweighted graph
         g = Graph(False)
         v1 = Vertex("A")
         v2 = Vertex("B")
@@ -41,7 +41,6 @@ class GetGraphs:
         g.addEdge(e7)
         g.addEdge(e8)
         g.addEdge(e9)
-
         return g
 
     def getG2(self): # weighted graph
