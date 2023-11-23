@@ -1,4 +1,7 @@
 from queue import Queue, LifoQueue
+from Graph import Graph
+from collections import defaultdict
+
 class SearchGraph:
     def dfs_recursive(self, adjList, start, visited=set()):
         if start not in visited:
@@ -38,3 +41,39 @@ class SearchGraph:
                     visited.add(u)
                     queue.put(u)
 
+    def doTS(self, g):
+        adjList = g.getAdjList()
+        visited = defaultdict() # { key : vtx, value : bool }
+        for vtx in adjList:
+            visited[vtx] = False
+
+        result = []
+        for v in visited:
+            self.dfsTS(v, adjList, visited, result)
+        print(result)
+
+    def dfsTS(self, v, adjList, visited, result):
+        if not visited[v]:
+            visited[v] = True
+            for neighbor in adjList[v]:
+                self.dfsTS(neighbor,  adjList, visited, result)
+            result.insert(0, v)
+    def findCC(self, adjList): # Connected Components
+        visited = set()
+        colorList = []
+        for vtx in adjList:
+            if vtx not in visited:
+                color = self.dfsCC(adjList, [], vtx, visited)
+                colorList.append(color)
+        print("Connected Components = {}".format(len(colorList)))
+        print("colorList : " , colorList)
+
+    def dfsCC(self, adjList, color, vtx, visited ):
+        if vtx not in visited:
+            visited.add(vtx)
+            color.append(vtx)
+            neighbor = adjList[vtx]
+            for vtx in neighbor:
+                if vtx not in visited:
+                    self.dfsCC(adjList, color, vtx, visited )
+        return color
