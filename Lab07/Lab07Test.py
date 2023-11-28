@@ -2,6 +2,8 @@ from GetGraphs import *
 from Graph import *
 from SearchGraph import *
 from  EightQueen import EightQueen
+from MinimumSpanningTree import *
+
 def testGrapgh():
     gg = GetGraphs()
     graph = gg.getG1()
@@ -38,11 +40,24 @@ def testSearchGraph():
     # sg.findCC(adjList)
     GetGraphs().getG4_TestConnectedComponents()
 
+def useMst():
+    graph = GetGraphs().getG5()
+    print(graph)
+    print("graph.getEdges(): ", graph.getEdges())
+    print("graph.getSize():" , graph.getSize())
+
+    print()
+    mst =  MST()
+    T = mst.mstKruskal(graph)
+    print(T)
+    print("T.getEdges(): ", T.getEdges())
+    print("T.getSize():" , T.getSize())
 
 
 def main():
     # testGrapgh()
-    testSearchGraph()
+    # testSearchGraph()
+    useMst()
 
 if __name__ == "__main__":
     main()

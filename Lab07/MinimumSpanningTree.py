@@ -1,5 +1,8 @@
+from Graph import Graph
+from queue import PriorityQueue
+
 class DisjointSet:
-    def __init__(self, n):
+    def __init__(self):
         self.parent = dict()
         self.rank = dict()
 
@@ -23,5 +26,33 @@ class DisjointSet:
                 self.parent[root1] = root2
                 if self.rank[root1] == self.rank[root2]:
                     self.rank[root2] += 1
+
+
+class MST:
+    def mstKruskal(self, G):
+        T = Graph(G.isDirected())
+        for v in G.getVertexList():
+            T.addVertex(v)
+
+        ds = DisjointSet()
+        for v in G.getVertexList():
+            ds.makeSet(v)
+
+        pq = PriorityQueue()
+        for e in G.getEdges():
+            pq.put(e)
+
+        while not pq.empty():
+            e = pq.get()
+            p1 = ds.find(e.getU())
+            p2 = ds.find(e.getV())
+            if p1 != p2:
+                T.addEdge(e)
+                ds.union(p1, p2) # ds.union(e.getU(), e.getV())
+
+        return T # graph
+
+
+
 
 

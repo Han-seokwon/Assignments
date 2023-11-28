@@ -82,11 +82,18 @@ class Graph:
     def getOrder(self):
         pass
     def getSize(self): # use number of edges
-        pass
+        size = len(self.getEdges())
+        if not self.isDirected():
+            size = size // 2
+        return size
+
     def getVertexDegree(self):
         pass
     def getDegree(self):
         pass
+
+    def isDirected(self):
+        return self.Directed
 
     def getNeighbors(self, vtx):
         nlist = [] # neighbor list
