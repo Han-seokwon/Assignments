@@ -79,8 +79,9 @@ class Graph:
         orderedVertexList = OrderedDict(sorted(self.keyIndex.items()))
         return list(orderedVertexList.keys())
 
-    def getOrder(self):
-        pass
+    def getOrder(self): # number of vertices
+        return len(self.keyIndex)
+
     def getSize(self): # use number of edges
         size = len(self.getEdges())
         if not self.isDirected():
@@ -95,12 +96,15 @@ class Graph:
     def isDirected(self):
         return self.Directed
 
-    def getNeighbors(self, vtx):
-        nlist = [] # neighbor list
+    def getNeighborVertices(self, vtx):
+        nlist = [] # neighbor vtx list
         edgeList = self.gdict.get(vtx)
         for e in edgeList:
             nlist.append(e.getV())
         return nlist
+
+    def getNeighborEdges(self, vtx):
+        return self.gdict[vtx]
 
     def getAdjList(self):
         alist = {}

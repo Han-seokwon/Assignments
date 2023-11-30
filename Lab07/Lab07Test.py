@@ -40,13 +40,13 @@ def testSearchGraph():
     # sg.findCC(adjList)
     GetGraphs().getG4_TestConnectedComponents()
 
-def useMst():
+def testMST():
     graph = GetGraphs().getG5()
     print(graph)
     print("graph.getEdges(): ", graph.getEdges())
     print("graph.getSize():" , graph.getSize())
 
-    print()
+    print("\n========== < Kruskal mst > ==========\n")
     mst =  MST()
     T = mst.mstKruskal(graph)
     print(T)
@@ -54,10 +54,29 @@ def useMst():
     print("T.getSize():" , T.getSize())
 
 
+    print("\n========== < Prim mst > ==========\n")
+    g = GetGraphs().getG6()
+    startVertex = g.getVertexList()[0]
+    T2 = mst.runPrim(g, startVertex)
+    print(T2)
+    print("T2.getEdges(): ",T2.getEdges())
+    print("T2.getSize(): ",T2.getSize())
+
+
+
+def testDijstra():
+    g = GetGraphs().getG6()
+    print(g)
+    startVertex = g.getVertexList()[0]
+    dk = Dijkstra()
+    dk.runDijkstra(g, startVertex)
+
+
 def main():
     # testGrapgh()
     # testSearchGraph()
-    useMst()
+    testMST()
+    # testDijstra()
 
 if __name__ == "__main__":
     main()

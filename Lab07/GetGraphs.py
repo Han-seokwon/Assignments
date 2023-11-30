@@ -163,8 +163,48 @@ class GetGraphs:
         g.addEdge(e9)
         return g
 
-    def getG5(self):  # weighted graph
+    def getG5(self):  # Kruskal, Prim
         g = Graph(False)
+
+        A = Vertex("A")
+        B = Vertex("B")
+        C = Vertex("C")
+        D = Vertex("D")
+        E = Vertex("E")
+        F = Vertex("F")
+        G = Vertex("G")
+
+        g.addVertex(A)
+        g.addVertex(B)
+        g.addVertex(C)
+        g.addVertex(D)
+        g.addVertex(E)
+        g.addVertex(F)
+        g.addVertex(G)
+
+        e1 = Edge(A, B, 29)
+        e2 = Edge(A, F, 10)
+        e3 = Edge(B, C, 16)
+        e4 = Edge(B, G, 15)
+        e5 = Edge(C, D, 12)
+        e6 = Edge(D, G, 18)
+        e7 = Edge(D, E, 22)
+        e8 = Edge(E, F, 27)
+        e9 = Edge(E, G, 25)
+
+        g.addEdge(e1)
+        g.addEdge(e2)
+        g.addEdge(e3)
+        g.addEdge(e4)
+        g.addEdge(e5)
+        g.addEdge(e6)
+        g.addEdge(e7)
+        g.addEdge(e8)
+        g.addEdge(e9)
+        return g
+
+    def getG6(self):  # weighted graph
+        g = Graph(True)
         v1 = Vertex("A")
         v2 = Vertex("B")
         v3 = Vertex("C")
