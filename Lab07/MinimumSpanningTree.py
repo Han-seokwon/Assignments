@@ -1,5 +1,5 @@
-from Graph import Graph
 from queue import PriorityQueue
+from Graph import Graph
 
 class DisjointSet:
     def __init__(self):
@@ -29,7 +29,6 @@ class DisjointSet:
 
 
 class MST:
-
     def mstKruskal(self, G):
         T = Graph(G.isDirected())
         for v in G.getVertexList():
@@ -40,29 +39,27 @@ class MST:
             ds.makeSet(v)
 
         pq = PriorityQueue()
-        for e in G.getEdges():
-            pq.put(e)
+        for edge in G.getEdgeList():
+            pq.put(edge)
 
         while not pq.empty():
-            e = pq.get()
-            p1 = ds.find(e.getU())
-            p2 = ds.find(e.getV())
+            edge = pq.get()
+            p1 = ds.find(edge.getU())
+            p2 = ds.find(edge.getV())
             if p1 != p2:
-                T.addEdge(e)
-                ds.union(p1, p2) # ds.union(e.getU(), e.getV())
-
-        return T # graph
+                T.addEdge(edge)
+                ds.union(p1, p2)
+        return T
 
 
     def runPrim(self, graph, startVertex):
         T = Graph(graph.isDirected())
-        eList = []
         PQ = PriorityQueue()
 
         for edge in graph.getNeighborEdges(startVertex):
             PQ.put(edge)
-        T.addVertex(startVertex)
 
+        T.addVertex(startVertex)
         while T.getOrder() != graph.getOrder(): # number of vertices
             minEdge = PQ.get()
             vtxV = minEdge.getV()
@@ -70,21 +67,19 @@ class MST:
                 continue
             #else
             T.addVertex(vtxV)
-            eList.append(minEdge)
+            T.addEdge(minEdge)
             for edge in graph.getNeighborEdges(vtxV):
                 PQ.put(edge)
 
-        # for edge in eList:
-        #     print(edge)
         return T
 
 
 
 class Dijkstra:
     def runDijkstra(self, graph, startVertex):
-        known = {}
-        Dv = {} # distance between start node
-        Pv ={}
+        known = {} # visited
+        Dv = {} # Distance between start Vertex(node)
+        Pv ={} # Parent Vertex
         for vtx in graph.getVertexList(): # initialize
             known[vtx] = False
             Dv[vtx] = float("inf")
@@ -93,30 +88,29 @@ class Dijkstra:
         Dv[startVertex] = 0.0
 
         PQ = PriorityQueue()
-        PQ.put((0, startVertex)) # 튜플( 거리, vertex )
+        PQ.put((0, startVertex)) # tuple( distance between start Vertex, current vertex )
 
         while not PQ.empty():
             self.printConfiguration(known, Dv, Pv)
-            emin = PQ.get()[1]
-            for e in graph.getNeighborEdges(emin) :
-                EdgeDistance = e.getWeight()
-                newDistance = Dv[e.getU()] + EdgeDistance
+            edgeMin = PQ.get()[1] # get vertex
+            for edge in graph.getNeighborEdges(edgeMin) :
+                edgeDistance = edge.getWeight()
+                newDistance = Dv[edge.getU()] + edgeDistance
                 # 아직 추가가 안 된 vertex이고, 저장된 거리보다 새로운 거리가 가까운 경우
-                if( not known[e.getV()]) and (Dv[e.getV()] > newDistance) :
-                    Dv[e.getV()] = newDistance # 더 가까운 거리로 바꿈
-                    Pv[e.getV()] = e.getU()  # 부모 노드를 바꿈 U : start node
-                    PQ.put(newDistance, e.getV()) # 튜플 업데이트
-
-                known[e.getU] = True
+                if( not known[edge.getV()]) and (Dv[edge.getV()] > newDistance) :
+                    Dv[edge.getV()] = newDistance # 더 가까운 거리로 바꿈
+                    Pv[edge.getV()] = edge.getU()  # 부모 노드를 바꿈 U : start node
+                    PQ.put((newDistance, edge.getV())) # 해당 경로 추가
+                known[edge.getU()] = True
+        self.printConfiguration(known, Dv, Pv)
 
     def printConfiguration(self, known, Dv, Pv):
-        print("Configuration")
-        print("vtx, known, Dv, Pv")
+        print("\n<Configuration>")
+        print("vtx | known | Dv | Pv")
         for vtx in known:
-            print("{}, {}, {}, {}".format(vtx, known[vtx], Dv[vtx], Pv[vtx]))
+            print("{} | {} | {} | {}".format(vtx, known[vtx], Dv[vtx], Pv[vtx]))
 
-    def printConfiguration(self, known, Dv, Pv):
-        pass\
+
 
 
 

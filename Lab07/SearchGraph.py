@@ -1,5 +1,4 @@
 from queue import Queue, LifoQueue
-from Graph import Graph
 from collections import defaultdict
 
 class SearchGraph:
@@ -19,7 +18,7 @@ class SearchGraph:
         while not stack.empty():
             v = stack.get()
             print(v, end = " -> ")
-            neighbors  = adjList[v]
+            neighbors = adjList[v]
             for u in neighbors:
                 if u not in visited:
                     visited.add(u)
@@ -41,23 +40,6 @@ class SearchGraph:
                     visited.add(u)
                     queue.put(u)
 
-    def doTS(self, g):
-        adjList = g.getAdjList()
-        visited = defaultdict() # { key : vtx, value : bool }
-        for vtx in adjList:
-            visited[vtx] = False
-
-        result = []
-        for v in visited:
-            self.dfsTS(v, adjList, visited, result)
-        print(result)
-
-    def dfsTS(self, v, adjList, visited, result):
-        if not visited[v]:
-            visited[v] = True
-            for neighbor in adjList[v]:
-                self.dfsTS(neighbor,  adjList, visited, result)
-            result.insert(0, v)
     def findCC(self, adjList): # Connected Components
         visited = set()
         colorList = []
@@ -77,3 +59,22 @@ class SearchGraph:
                 if vtx not in visited:
                     self.dfsCC(adjList, color, vtx, visited )
         return color
+
+
+    def doTS(self, g): #  Topological Sort
+        adjList = g.getAdjList()
+        visited = defaultdict() # { key : vtx, value : bool }
+        for vtx in adjList:
+            visited[vtx] = False
+
+        result = []
+        for vtx in visited:
+            self.dfsTS(vtx, adjList, visited, result)
+        print(result)
+
+    def dfsTS(self, vtx,  adjList, visited, result):
+        if not visited[vtx]:
+            visited[vtx] = True
+            for neighbor in adjList[vtx]:
+                self.dfsTS(neighbor,  adjList, visited, result)
+            result.insert(0, vtx) # Put the last vtx first, and it's getting pushed back

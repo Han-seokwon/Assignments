@@ -7,7 +7,6 @@ from ExpressionTree import  *
 from WordMeaningDictionary import *
 from MinHeap import *
 from HuffmanCodes import *
-from BTree import BTree
 
 def BFS01(n):
     queue = Queue()
